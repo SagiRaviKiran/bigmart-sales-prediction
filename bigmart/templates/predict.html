@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BigMart - Sales Prediction</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8fafc;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+        }
+        .card-hover {
+            transition: transform 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+        }
+        .animate-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: .5;
+            }
+        }
+        /* New styles for enhanced form */
+        .form-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        .form-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+        .form-input {
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 12px 16px;
+            transition: all 0.3s ease;
+        }
+        .form-input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+        }
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236b7280'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 20px;
+            padding-right: 40px;
+        }
+        .section-header {
+            position: relative;
+            padding-bottom: 12px;
+            margin-bottom: 24px;
+        }
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, #3b82f6, #2563eb);
+            border-radius: 3px;
+        }
+        .form-label {
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 8px;
+            display: block;
+        }
+        .submit-btn {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            border-radius: 12px;
+            padding: 14px 32px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.2);
+        }
+        .input-group {
+            position: relative;
+        }
+        .input-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6b7280;
+        }
+        .input-with-icon {
+            padding-left: 44px;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex-shrink-0 flex items-center">
+                        <img class="h-8 w-auto" src="https://cdn-icons-png.flaticon.com/512/3081/3081559.png" alt="BigMart Logo">
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="/" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
+                        <i class="fas fa-home mr-2"></i>Home
+                    </a>
+                    <a href="/about" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
+                        <i class="fas fa-info-circle mr-2"></i>About
+                    </a>
+                    <a href="predict.html" class="text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
+                        <i class="fas fa-chart-line mr-2"></i>Predict
+                    </a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button type="button" class="mobile-menu-button inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-blue-600 focus:outline-none">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div class="mobile-menu hidden md:hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="{{ url_for('home') }}" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">
+                    <i class="fas fa-home mr-2"></i>Home
+                </a>
+                <a href="{{ url_for('about') }}" class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">
+                    <i class="fas fa-info-circle mr-2"></i>About
+                </a>
+                <a href="{{ url_for('predict') }}" class="text-blue-600 block px-3 py-2 rounded-md text-base font-medium">
+                    <i class="fas fa-chart-line mr-2"></i>Predict
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="gradient-bg pt-24 pb-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl font-bold text-white mb-4">Sales Prediction Tool</h1>
+                <p class="text-xl text-white/90">Get accurate sales predictions using our advanced AI model</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Prediction Form -->
+            <div class="form-card p-8">
+                <form id="predictionForm" class="space-y-8">
+                    <!-- Item Information -->
+                    <div class="space-y-6">
+                        <div class="section-header">
+                            <h2 class="text-2xl font-semibold text-gray-800 flex items-center">
+                                <i class="fas fa-box text-blue-600 mr-3 text-2xl"></i>
+                                Item Information
+                            </h2>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="input-group">
+                                <label class="form-label">Item Identifier</label>
+                                <div class="relative">
+                                    <i class="fas fa-barcode input-icon"></i>
+                                    <input type="text" name="Item_Identifier" required
+                                        class="form-input input-with-icon w-full"
+                                        placeholder="Enter item identifier">
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label class="form-label">Item Weight</label>
+                                <div class="relative">
+                                    <i class="fas fa-weight input-icon"></i>
+                                    <input type="number" name="Item_Weight" required
+                                        class="form-input input-with-icon w-full"
+                                        placeholder="Enter item weight">
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label class="form-label">Fat Content</label>
+                                <select name="Item_Fat_Content" required
+                                    class="form-input form-select w-full">
+                                    <option value="">Select Fat Content</option>
+                                    <option value="Low Fat">Low Fat</option>
+                                    <option value="Regular">Regular</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <label class="form-label">Item Visibility</label>
+                                <div class="relative">
+                                    <i class="fas fa-eye input-icon"></i>
+                                    <input type="number" name="Item_Visibility" required step="0.01"
+                                        class="form-input input-with-icon w-full"
+                                        placeholder="Enter visibility (0-1)">
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label class="form-label">Item Type</label>
+                                <select name="Item_Type" required
+                                    class="form-input form-select w-full">
+                                    <option value="">Select Item Type</option>
+                                    <option value="Dairy">Dairy</option>
+                                    <option value="Soft Drinks">Soft Drinks</option>
+                                    <option value="Meat">Meat</option>
+                                    <option value="Fruits and Vegetables">Fruits and Vegetables</option>
+                                    <option value="Household">Household</option>
+                                    <option value="Baking Goods">Baking Goods</option>
+                                    <option value="Snack Foods">Snack Foods</option>
+                                    <option value="Frozen Foods">Frozen Foods</option>
+                                    <option value="Breakfast">Breakfast</option>
+                                    <option value="Health and Hygiene">Health and Hygiene</option>
+                                    <option value="Hard Drinks">Hard Drinks</option>
+                                    <option value="Canned">Canned</option>
+                                    <option value="Breads">Breads</option>
+                                    <option value="Starchy Foods">Starchy Foods</option>
+                                    <option value="Others">Others</option>
+                                    <option value="Seafood">Seafood</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <label class="form-label">Item MRP</label>
+                                <div class="relative">
+                                    <i class="fas fa-tag input-icon"></i>
+                                    <input type="number" name="Item_MRP" required
+                                        class="form-input input-with-icon w-full"
+                                        placeholder="Enter MRP">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Outlet Information -->
+                    <div class="space-y-6">
+                        <div class="section-header">
+                            <h2 class="text-2xl font-semibold text-gray-800 flex items-center">
+                                <i class="fas fa-store text-blue-600 mr-3 text-2xl"></i>
+                                Outlet Information
+                            </h2>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="input-group">
+                                <label class="form-label" for="Outlet_Identifier">Outlet Identifier</label>
+                                <div class="relative">
+                                    <i class="fas fa-hashtag input-icon"></i>
+                                    <select id="Outlet_Identifier" name="Outlet_Identifier" required class="form-input input-with-icon w-full">
+                                        <option value="" disabled>Select Outlet ID</option>
+                                        <option value="OUT049">OUT049 - Medium size, Tier 1, Supermarket Type1</option>
+                                        <option value="OUT018">OUT018 - Medium size, Tier 3, Supermarket Type2</option>
+                                        <option value="OUT010">OUT010 - Tier 3, Grocery Store</option>
+                                        <option value="OUT013">OUT013 - High size, Tier 3, Supermarket Type1</option>
+                                        <option value="OUT027">OUT027 - Medium size, Tier 3, Supermarket Type3</option>
+                                        <option value="OUT045">OUT045 - Tier 2, Supermarket Type1</option>
+                                        <option value="OUT017">OUT017 - Tier 2, Supermarket Type1</option>
+                                        <option value="OUT046">OUT046 - Small size, Tier 1, Supermarket Type1</option>
+                                        <option value="OUT035">OUT035 - Small size, Tier 2, Supermarket Type1</option>
+                                        <option value="OUT019">OUT019 - Small size, Tier 1, Grocery Store</option>
+                                    </select>
+                                </div>
+                                <p class="text-sm text-gray-500 mt-1">Select from available outlet identifiers in the training data</p>
+                            </div>
+                            
+                            <div class="input-group">
+                                <label class="form-label">Establishment Year</label>
+                                <div class="relative">
+                                    <i class="fas fa-calendar input-icon"></i>
+                                    <input type="number" name="Outlet_Establishment_Year" required
+                                        class="form-input input-with-icon w-full"
+                                        placeholder="Enter year">
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label class="form-label">Outlet Size</label>
+                                <select name="Outlet_Size" required
+                                    class="form-input form-select w-full">
+                                    <option value="">Select Outlet Size</option>
+                                    <option value="High">High</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="Small">Small</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <label class="form-label">Location Type</label>
+                                <select name="Outlet_Location_Type" required
+                                    class="form-input form-select w-full">
+                                    <option value="">Select Location Type</option>
+                                    <option value="Tier 1">Tier 1</option>
+                                    <option value="Tier 2">Tier 2</option>
+                                    <option value="Tier 3">Tier 3</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <label class="form-label">Outlet Type</label>
+                                <select name="Outlet_Type" required
+                                    class="form-input form-select w-full">
+                                    <option value="">Select Outlet Type</option>
+                                    <option value="Supermarket Type1">Supermarket Type1</option>
+                                    <option value="Supermarket Type2">Supermarket Type2</option>
+                                    <option value="Supermarket Type3">Supermarket Type3</option>
+                                    <option value="Grocery Store">Grocery Store</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-center pt-4">
+                        <button type="submit"
+                            class="submit-btn text-white flex items-center space-x-2">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Predict Sales</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Prediction Result -->
+            <div class="bg-white rounded-lg shadow-xl p-6">
+                <div class="text-center">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-6">Prediction Result</h2>
+                    <div id="loading" class="hidden">
+                        <div class="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600 mx-auto"></div>
+                        <p class="mt-4 text-gray-600">Calculating prediction...</p>
+                    </div>
+                    <div id="result" class="hidden">
+                        <div class="bg-blue-50 rounded-lg p-6">
+                            <div class="text-4xl font-bold text-blue-600 mb-2">
+                                <span id="predictionValue">0</span>
+                            </div>
+                            <p class="text-gray-600">Predicted Sales</p>
+                        </div>
+                        <div class="mt-6">
+                            <button onclick="resetForm()"
+                                class="bg-gray-100 text-gray-700 px-6 py-2 rounded-lg font-medium hover:bg-gray-200 transition duration-300">
+                                <i class="fas fa-redo mr-2"></i>
+                                Make Another Prediction
+                            </button>
+                        </div>
+                    </div>
+                    <div id="error" class="hidden">
+                        <div class="bg-red-50 rounded-lg p-6">
+                            <i class="fas fa-exclamation-circle text-red-500 text-4xl mb-4"></i>
+                            <p class="text-red-600" id="errorMessage"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="mt-16">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Why Choose Our Prediction Tool?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover">
+                    <div class="text-blue-600 text-4xl mb-4">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">AI-Powered Predictions</h3>
+                    <p class="text-gray-600">Advanced machine learning algorithms for accurate sales forecasting</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover">
+                    <div class="text-blue-600 text-4xl mb-4">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Real-time Results</h3>
+                    <p class="text-gray-600">Get instant predictions with our optimized processing system</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 card-hover">
+                    <div class="text-blue-600 text-4xl mb-4">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Data-Driven Insights</h3>
+                    <p class="text-gray-600">Make informed decisions based on historical data analysis</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <img src="https://cdn-icons-png.flaticon.com/512/3081/3081559.png" alt="BigMart Logo" class="h-8 w-auto mb-4">
+                    <p class="text-gray-400">Empowering businesses with data-driven insights for better decision making.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-white">About</a></li>
+                        <li><a href="predict.html" class="text-gray-400 hover:text-white">Predict</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contact</h3>
+                    <ul class="space-y-2">
+                        <li class="text-gray-400"><i class="fas fa-envelope mr-2"></i> info@bigmart.com</li>
+                        <li class="text-gray-400"><i class="fas fa-phone mr-2"></i> +1 234 567 890</li>
+                        <li class="text-gray-400"><i class="fas fa-map-marker-alt mr-2"></i> 123 Business St</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Follow Us</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 BigMart. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-button').addEventListener('click', function() {
+            document.querySelector('.mobile-menu').classList.toggle('hidden');
+        });
+
+        // Form submission
+        document.getElementById('predictionForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Show loading
+            document.getElementById('loading').classList.remove('hidden');
+            document.getElementById('result').classList.add('hidden');
+            document.getElementById('error').classList.add('hidden');
+
+            try {
+                const formData = new FormData(this);
+                const response = await fetch('/predict', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (!response.ok) {
+                    throw new Error('Prediction failed');
+                }
+
+                const data = await response.json();
+                
+                // Hide loading, show result
+                document.getElementById('loading').classList.add('hidden');
+                document.getElementById('result').classList.remove('hidden');
+                
+                // Animate the prediction value
+                const predictionValue = document.getElementById('predictionValue');
+                predictionValue.textContent = '0';
+                const targetValue = data.prediction;
+                let currentValue = 0;
+                const duration = 2000; // 2 seconds
+                const steps = 60;
+                const increment = targetValue / steps;
+                const stepTime = duration / steps;
+
+                const animate = () => {
+                    currentValue += increment;
+                    if (currentValue < targetValue) {
+                        predictionValue.textContent = Math.round(currentValue);
+                        setTimeout(animate, stepTime);
+                    } else {
+                        predictionValue.textContent = Math.round(targetValue);
+                    }
+                };
+                animate();
+
+            } catch (error) {
+                document.getElementById('loading').classList.add('hidden');
+                document.getElementById('error').classList.remove('hidden');
+                document.getElementById('errorMessage').textContent = error.message;
+            }
+        });
+
+        // Reset form
+        function resetForm() {
+            document.getElementById('predictionForm').reset();
+            document.getElementById('result').classList.add('hidden');
+        }
+    </script>
+</body>
+</html> 

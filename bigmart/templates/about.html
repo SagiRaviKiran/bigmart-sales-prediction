@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - BigMart Analytics</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <i class="fas fa-chart-line"></i>
+                <span>BigMart Analytics</span>
+            </div>
+            <div class="nav-links">
+                <a href="{{ url_for('home') }}"><i class="fas fa-home"></i> Home</a>
+                <a href="{{ url_for('about') }}" class="active"><i class="fas fa-info-circle"></i> About</a>
+                <a href="{{ url_for('predict') }}"><i class="fas fa-chart-bar"></i> Predict</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- About Hero Section -->
+        <section class="about-hero">
+            <div class="about-hero-content">
+                <h1>Revolutionizing Retail Analytics</h1>
+                <p>Empowering businesses with data-driven insights and AI-powered predictions</p>
+            </div>
+        </section>
+
+        <!-- Mission Section -->
+        <section class="mission-section">
+            <div class="container">
+                <div class="mission-content">
+                    <div class="mission-text">
+                        <h2>Our Mission</h2>
+                        <p>At BigMart Analytics, we're committed to transforming retail businesses through innovative AI solutions. Our mission is to empower retailers with accurate predictions and actionable insights, enabling them to make informed decisions and drive sustainable growth.</p>
+                    </div>
+                    <div class="mission-stats">
+                        <div class="mission-stat-item">
+                            <span class="stat-number">5+ Years</span>
+                            <span class="stat-label">Industry Experience</span>
+                        </div>
+                        <div class="mission-stat-item">
+                            <span class="stat-number">500+</span>
+                            <span class="stat-label">Happy Clients</span>
+                        </div>
+                        <div class="mission-stat-item">
+                            <span class="stat-number">98%</span>
+                            <span class="stat-label">Accuracy Rate</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Core Values Section -->
+        <section class="values-section">
+            <div class="container">
+                <h2>Our Core Values</h2>
+                <div class="values-grid">
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <h3>Innovation</h3>
+                        <p>Continuously evolving our technology to provide cutting-edge solutions</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Reliability</h3>
+                        <p>Delivering consistent and accurate predictions you can trust</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h3>Partnership</h3>
+                        <p>Building long-term relationships with our clients for mutual success</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <h3>Security</h3>
+                        <p>Ensuring the highest standards of data protection and privacy</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technology Section -->
+        <section class="technology-section">
+            <div class="container">
+                <h2>Our Technology Stack</h2>
+                <div class="tech-grid">
+                    <div class="tech-card">
+                        <div class="tech-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3>Machine Learning</h3>
+                        <p>Advanced algorithms for accurate sales predictions</p>
+                    </div>
+                    <div class="tech-card">
+                        <div class="tech-icon">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <h3>Big Data</h3>
+                        <p>Robust data processing and analysis capabilities</p>
+                    </div>
+                    <div class="tech-card">
+                        <div class="tech-icon">
+                            <i class="fas fa-cloud"></i>
+                        </div>
+                        <h3>Cloud Infrastructure</h3>
+                        <p>Scalable and secure cloud-based solutions</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Section -->
+        <section class="team-section">
+            <div class="container">
+                <h2>Meet Our Expert Team</h2>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="team-image">
+                            <img src="{{ url_for('static', filename='images/team-lead.jpg') }}" alt="Team Lead">
+                        </div>
+                        <h3>Ravi Kiran</h3>
+                        <p class="team-role">Lead Data Scientist</p>
+                        <p class="team-desc">PhD in Machine Learning with 10+ years of experience in retail analytics</p>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-image">
+                            <img src="{{ url_for('static', filename='images/tech-lead.jpg') }}" alt="Tech Lead">
+                        </div>
+                        <h3>Kusuma</h3>
+                        <p class="team-role">Technical Lead</p>
+                        <p class="team-desc">Expert in building scalable AI solutions for enterprise clients</p>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-image">
+                            <img src="{{ url_for('static', filename='images/analyst.jpg') }}" alt="Senior Analyst">
+                        </div>
+                        <h3>Sai</h3>
+                        <p class="team-role">Senior Business Analyst</p>
+                        <p class="team-desc">Specialized in retail market analysis and business intelligence</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact-section">
+            <div class="container">
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <h2>Get in Touch</h2>
+                        <p>Ready to transform your retail business? Contact us today for a personalized demo.</p>
+                        <div class="contact-details">
+                            <div class="contact-item">
+                                <i class="fas fa-envelope"></i>
+                                <span>info@bigmart.com</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-phone"></i>
+                                <span>+1 234 567 890</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>123 Business Street, City</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-cta">
+                        <a href="{{ url_for('predict') }}" class="cta-button primary">Try Our Prediction Tool</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="footer-logo">
+                    <i class="fas fa-chart-line"></i>
+                    <span>BigMart Analytics</span>
+                </div>
+                <p>Advanced sales prediction using machine learning</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="{{ url_for('about') }}">About</a></li>
+                    <li><a href="{{ url_for('predict') }}">Predict</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <ul class="contact-info">
+                    <li><i class="fas fa-envelope"></i> info@bigmart.com</li>
+                    <li><i class="fas fa-phone"></i> +1 234 567 890</li>
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Business Street, City</li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 BigMart Analytics. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

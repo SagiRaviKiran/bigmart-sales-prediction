@@ -1,0 +1,290 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BigMart Sales Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <i class="fas fa-chart-line"></i>
+                <span>BigMart Analytics</span>
+            </div>
+            <div class="nav-links">
+                <a href="{{ url_for('home') }}" class="active"><i class="fas fa-home"></i> Home</a>
+                <a href="{{ url_for('about') }}"><i class="fas fa-info-circle"></i> About</a>
+                <a href="{{ url_for('predict') }}"><i class="fas fa-chart-bar"></i> Predict</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Transform Your Retail Business with AI-Powered Sales Prediction</h1>
+                <p>Leverage advanced machine learning to optimize inventory, boost sales, and enhance customer satisfaction</p>
+                <div class="hero-buttons">
+                    <a href="{{ url_for('predict') }}" class="cta-button primary">Get Started</a>
+                    <a href="{{ url_for('about') }}" class="cta-button secondary">Learn More</a>
+                </div>
+            </div>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number">98%</span>
+                    <span class="stat-label">Prediction Accuracy</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">24/7</span>
+                    <span class="stat-label">Real-time Analytics</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">1000+</span>
+                    <span class="stat-label">Stores Analyzed</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features">
+            <h2>Powerful Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>AI-Powered Predictions</h3>
+                    <p>Advanced machine learning algorithms for precise sales forecasting</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Real-time Analytics</h3>
+                    <p>Live dashboard with instant insights and performance metrics</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-box"></i>
+                    </div>
+                    <h3>Inventory Optimization</h3>
+                    <p>Smart stock management to reduce waste and improve efficiency</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Customer Insights</h3>
+                    <p>Deep analysis of customer behavior and preferences</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Analytics Dashboard Preview -->
+        <section class="dashboard-preview">
+            <h2>Live Analytics Dashboard</h2>
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <i class="fas fa-shopping-cart"></i>
+                        <h3>Sales Overview</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="metric">
+                            <span class="metric-value">₹45,678</span>
+                            <span class="metric-label">Today's Sales</span>
+                        </div>
+                        <div class="trend positive">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>12.5%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <i class="fas fa-box"></i>
+                        <h3>Inventory Status</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="metric">
+                            <span class="metric-value">1,234</span>
+                            <span class="metric-label">Items in Stock</span>
+                        </div>
+                        <div class="trend negative">
+                            <i class="fas fa-arrow-down"></i>
+                            <span>3.2%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <i class="fas fa-users"></i>
+                        <h3>Customer Traffic</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="metric">
+                            <span class="metric-value">856</span>
+                            <span class="metric-label">Today's Visitors</span>
+                        </div>
+                        <div class="trend positive">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>8.7%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section class="how-it-works">
+            <h2>How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>Data Collection</h3>
+                    <p>Gather historical sales data and store information</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>AI Analysis</h3>
+                    <p>Advanced algorithms analyze patterns and trends</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h3>Generate Insights</h3>
+                    <p>Get accurate sales predictions and recommendations</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits Section -->
+        <section class="benefits">
+            <h2>Why Choose BigMart Analytics?</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <img src="{{ url_for('static', filename='images/optimize-inventory.jpg') }}" alt="Optimize Inventory">
+                    <div class="benefit-content">
+                        <h3>Optimize Inventory</h3>
+                        <p>Reduce waste and improve stock management with AI-driven insights</p>
+                    </div>
+                </div>
+                <div class="benefit-card">
+                    <img src="{{ url_for('static', filename='images/increase-sales.jpg') }}" alt="Increase Sales">
+                    <div class="benefit-content">
+                        <h3>Increase Sales</h3>
+                        <p>Boost revenue with data-driven decisions and predictive analytics</p>
+                    </div>
+                </div>
+                <div class="benefit-card">
+                    <img src="{{ url_for('static', filename='images/customer-satisfaction.jpg') }}" alt="Customer Satisfaction">
+                    <div class="benefit-content">
+                        <h3>Customer Satisfaction</h3>
+                        <p>Enhance customer experience with better product availability</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="cta">
+            <div class="cta-content">
+                <h2>Ready to Transform Your Retail Business?</h2>
+                <p>Join thousands of retailers who are already using BigMart Analytics</p>
+                <div class="cta-buttons">
+                    <a href="{{ url_for('predict') }}" class="cta-button primary">Start Predicting</a>
+                    <a href="{{ url_for('about') }}" class="cta-button secondary">Schedule Demo</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="footer-logo">
+                    <i class="fas fa-chart-line"></i>
+                    <span>BigMart Analytics</span>
+                </div>
+                <p>Advanced sales prediction using machine learning</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="{{ url_for('about') }}">About</a></li>
+                    <li><a href="{{ url_for('predict') }}">Predict</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <ul class="contact-info">
+                    <li><i class="fas fa-envelope"></i> info@bigmart.com</li>
+                    <li><i class="fas fa-phone"></i> +1 234 567 890</li>
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Business Street, City</li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 BigMart Analytics. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('predictionForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Show loading spinner
+            document.getElementById('loading').style.display = 'flex';
+            document.getElementById('result').style.display = 'none';
+            document.getElementById('error').style.display = 'none';
+
+            try {
+                const formData = new FormData(this);
+                const response = await fetch('{{ url_for("predict") }}', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    document.getElementById('predictionValue').textContent = data.prediction;
+                    document.getElementById('result').style.display = 'block';
+                } else {
+                    document.getElementById('error').textContent = data.error || 'An error occurred';
+                    document.getElementById('error').style.display = 'block';
+                }
+            } catch (error) {
+                document.getElementById('error').textContent = 'An error occurred while processing your request';
+                document.getElementById('error').style.display = 'block';
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
